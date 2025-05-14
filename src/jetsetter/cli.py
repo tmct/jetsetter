@@ -143,7 +143,7 @@ def add(
         raise typer.Exit(code=1)
 
     if config_directory is None or not pathlib.Path(config_directory).exists():
-        typer.echo("Config directory not found. Exiting.", err=True)
+        typer.echo(f"Config directory not found at {config_directory}. Exiting.", err=True)
         raise typer.Exit(code=1)
 
     config_file_path = pathlib.Path(
@@ -152,8 +152,9 @@ def add(
 
     if not config_file_path.exists():
         typer.echo(
-            f"IDE {ide_version} config not found. Try running {ide_version} first. Exiting."
-        )
+            f"IDE {ide_version} config not found at {config_file_path}. "
+            f"Try running {ide_version} first. Exiting."
+        )  
         raise typer.Exit(code=1)
 
     final_path = str(interpreter_path.absolute()).replace(
